@@ -1,0 +1,171 @@
+/* ── Reset & Base ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background-color: #2d3436;
+  color: white;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.nav-tagline {
+  font-size: 13px;
+  color: #b2bec3;
+}
+
+/* ── Container ── */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px);
+  padding: 40px 16px;
+}
+
+/* ── Product Card ── */
+.product-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  max-width: 860px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Product Image ── */
+.product-image {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.product-emoji {
+  font-size: 120px;
+}
+
+/* ── Product Details ── */
+.product-details {
+  flex: 1;
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.product-badge {
+  background: #fdcb6e;
+  color: #2d3436;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  width: fit-content;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.product-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.product-description {
+  font-size: 14px;
+  color: #636e72;
+  line-height: 1.6;
+}
+
+/* ── Price ── */
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.price {
+  font-size: 32px;
+  font-weight: 800;
+  color: #2d3436;
+}
+
+.original-price {
+  font-size: 18px;
+  color: #b2bec3;
+  text-decoration: line-through;
+}
+
+.discount {
+  background: #d63031;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+/* ── Features ── */
+.features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.features li {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ── Buy Button ── */
+.buy-btn {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 8px;
+}
+
+.buy-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+}
+
+.buy-btn:active {
+  transform: translateY(0);
+}
+
+.secure-text {
+  font-size: 12px;
+  color: #b2bec3;
+  text-align: center;
+}
