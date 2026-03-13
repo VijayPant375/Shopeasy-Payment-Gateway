@@ -13,7 +13,11 @@ app.use(express.json());
 // Serve static frontend files from the client folder
 app.use(express.static(path.join(__dirname, '../client')));
 
-// Health check route - just to confirm server is running
+// Routes
+const orderRoutes = require('./routes/orderRoutes');
+app.use('/api/order', orderRoutes);
+
+// Health check route
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Server is running', port: PORT });
 });

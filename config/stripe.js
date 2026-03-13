@@ -1,11 +1,8 @@
-// razorpay.js - Initializes and exports the Razorpay instance
+// stripe.js - Initializes and exports the Stripe instance
 
-const Razorpay = require('razorpay');
+const Stripe = require('stripe');
 
-// Create Razorpay instance using API keys from .env
-const razorpayInstance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
-});
+// Create Stripe instance using secret key from .env
+const stripeInstance = Stripe(process.env.STRIPE_SECRET_KEY);
 
-module.exports = razorpayInstance;
+module.exports = stripeInstance;
