@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShopEasy - Premium Store</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- Stripe.js loaded from Stripe's CDN -->
+    <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
       <div class="logo">🛍️ ShopEasy</div>
-      <span class="nav-tagline">Secure Payments Powered by Razorpay</span>
+      <span class="nav-tagline">Secure Payments Powered by Stripe</span>
     </nav>
 
     <!-- Main Product Section -->
@@ -51,7 +53,16 @@
             Buy Now — ₹499
           </button>
 
-          <p class="secure-text">🔒 Secured by Razorpay</p>
+          <!-- Payment form injected here by Stripe -->
+          <div id="payment-container" style="display:none; margin-top: 20px;">
+            <div id="payment-element"></div>
+            <button class="buy-btn" id="submitBtn" style="display:none; margin-top: 16px;">
+              Pay ₹499 Securely
+            </button>
+            <div id="payment-message" style="color:red; margin-top:10px;"></div>
+          </div>
+
+          <p class="secure-text">🔒 Secured by Stripe</p>
         </div>
 
       </div>
