@@ -8,7 +8,6 @@ const stripe = require('../../config/stripe');
 router.post('/', async (req, res) => {
   const { amount, productName } = req.body;
 
-  // Validate amount
   if (!amount || amount < 100) {
     return res.status(400).json({
       success: false,

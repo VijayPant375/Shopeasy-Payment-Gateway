@@ -1,10 +1,11 @@
-// verifyRoutes.js - Handles payment verification
+// verifyRoutes.js - Handles payment verification and order update
 
 const express = require('express');
 const router = express.Router();
 const verifyPayment = require('../../utils/verifyPayment');
+const Order = require('../models/Order');
 
-// POST /api/verify - Verify payment status with Stripe
+// POST /api/verify - Verify payment and update order status
 router.post('/', async (req, res) => {
   const { paymentIntentId } = req.body;
 
@@ -19,6 +20,13 @@ router.post('/', async (req, res) => {
     const result = await verifyPayment(paymentIntentId);
 
     if (result.success) {
+      // Update order status in MongoDB
+      await Order.findOneAndUpdate(
+        { paymentIntentId },
+        { status: 'success' },
+        { new: true }
+      );
+
       return res.json({
         success: true,
         message: 'Payment verified successfully',
@@ -26,7 +34,14 @@ router.post('/', async (req, res) => {
         currency: result.currency,
         paymentIntentId: result.paymentIntentId,
       });
+
     } else {
+      // Mark order as failed
+      await Order.findOneAndUpdate(
+        { paymentIntentId },
+        { status: 'failed' },
+      );
+
       return res.status(400).json({
         success: false,
         message: result.message || 'Payment verification failed',
