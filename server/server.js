@@ -15,7 +15,10 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // Routes
 const orderRoutes = require('./routes/orderRoutes');
+const verifyRoutes = require('./routes/verifyRoutes');
+
 app.use('/api/order', orderRoutes);
+app.use('/api/verify', verifyRoutes);
 
 // Health check route
 app.get('/api/health', (req, res) => {
