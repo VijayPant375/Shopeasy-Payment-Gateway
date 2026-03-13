@@ -169,3 +169,83 @@ body {
   color: #b2bec3;
   text-align: center;
 }
+
+/* ── Success Page ── */
+.success-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  padding: 48px 40px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.success-icon {
+  font-size: 64px;
+}
+
+.success-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2d3436;
+}
+
+.success-subtitle {
+  font-size: 15px;
+  color: #636e72;
+}
+
+.order-details {
+  width: 100%;
+  background: #f4f6f9;
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.order-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.order-label {
+  color: #636e72;
+  font-weight: 500;
+}
+
+.order-value {
+  color: #2d3436;
+  font-weight: 700;
+  word-break: break-all;
+  text-align: right;
+  max-width: 60%;
+}
+
+.status-badge {
+  color: #00b894;
+}
+
+.back-btn {
+  margin-top: 8px;
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  transition: transform 0.2s;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+}

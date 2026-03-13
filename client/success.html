@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Successful - ShopEasy</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="logo">🛍️ ShopEasy</div>
+      <span class="nav-tagline">Secure Payments Powered by Stripe</span>
+    </nav>
+
+    <!-- Success Section -->
+    <main class="container">
+      <div class="success-card">
+
+        <div class="success-icon">✅</div>
+        <h1 class="success-title">Payment Successful!</h1>
+        <p class="success-subtitle">Thank you for your purchase.</p>
+
+        <!-- Order Details -->
+        <div class="order-details">
+          <div class="order-row">
+            <span class="order-label">Product</span>
+            <span class="order-value">Premium Cotton T-Shirt</span>
+          </div>
+          <div class="order-row">
+            <span class="order-label">Amount Paid</span>
+            <span class="order-value">₹499</span>
+          </div>
+          <div class="order-row">
+            <span class="order-label">Payment ID</span>
+            <span class="order-value" id="paymentId">Loading...</span>
+          </div>
+          <div class="order-row">
+            <span class="order-label">Status</span>
+            <span class="order-value status-badge">Confirmed ✅</span>
+          </div>
+        </div>
+
+        <a href="/" class="back-btn">← Continue Shopping</a>
+
+      </div>
+    </main>
+
+    <script src="success.js"></script>
+  </body>
+</html>
