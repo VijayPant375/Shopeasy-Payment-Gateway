@@ -1,11 +1,25 @@
-// success.js - Handles payment verification on success page
+// success.js - Payment verification on success page
 
-// Get payment intent ID from URL params (Stripe adds it automatically)
+// Apply saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+});
+
+// Verify payment
 const urlParams = new URLSearchParams(window.location.search);
 const paymentIntentId = urlParams.get('payment_intent');
 
 if (paymentIntentId) {
-  // Verify payment with backend
   fetch('/api/verify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -14,7 +28,6 @@ if (paymentIntentId) {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
-        // Show payment ID on success page
         document.getElementById('paymentId').textContent = paymentIntentId;
       } else {
         document.getElementById('paymentId').textContent = 'Verification failed';

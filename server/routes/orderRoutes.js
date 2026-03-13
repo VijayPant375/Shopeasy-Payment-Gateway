@@ -4,30 +4,29 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('../../config/stripe');
 
-// Product details (in a real app this would come from a database)
-const PRODUCT = {
-  name: 'Premium Cotton T-Shirt',
-  amount: 49900, // Amount in paise (499 * 100)
-  currency: 'inr',
-};
-
 // POST /api/order - Create a Stripe Payment Intent
 router.post('/', async (req, res) => {
+  const { amount, productName } = req.body;
+
+  // Validate amount
+  if (!amount || amount < 100) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid amount',
+    });
+  }
+
   try {
-    // Create a payment intent with Stripe
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: PRODUCT.amount,
-      currency: PRODUCT.currency,
-      metadata: {
-        product_name: PRODUCT.name,
-      },
+      amount,
+      currency: 'inr',
+      metadata: { product_name: productName || 'ShopEasy Product' },
     });
 
-    // Send client secret to frontend
     res.json({
       success: true,
       clientSecret: paymentIntent.client_secret,
-      amount: PRODUCT.amount,
+      amount,
     });
 
   } catch (error) {

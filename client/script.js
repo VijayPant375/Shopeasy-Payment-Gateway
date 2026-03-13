@@ -1,60 +1,79 @@
-// script.js - Stripe payment integration
+// script.js - ShopEasy frontend logic with Stripe integration
 
-// Initialize Stripe with publishable key
 const stripe = Stripe('pk_test_51TAEDYCPVGWl48dJW8JhKIbqX7YmYKLYqBljzR0UJsRQEwmVjKW7U01soPRsF7ZN9FVmwQTjXIWEKr5j33kUSqFI00TH4CtYeZ');
 
 let elements;
+let currentProduct = {};
 
-// Handle Buy Now button click
-document.getElementById('buyBtn').addEventListener('click', async () => {
-  const buyBtn = document.getElementById('buyBtn');
+// ── Dark Mode ──
+const themeToggle = document.getElementById('themeToggle');
 
-  // Show loading state
-  buyBtn.textContent = 'Loading...';
-  buyBtn.disabled = true;
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+// Apply on load
+applyTheme(localStorage.getItem('theme') || 'light');
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  applyTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// ── Open Checkout Modal ──
+async function openCheckout(productId, amount, productName) {
+  currentProduct = { productId, amount, productName };
+
+  document.getElementById('modalTitle').textContent = productName;
+  document.getElementById('modalSubtitle').textContent = `Amount: ₹${(amount / 100).toLocaleString('en-IN')}`;
+  document.getElementById('payBtnText').textContent = `Pay ₹${(amount / 100).toLocaleString('en-IN')} Securely`;
+  document.getElementById('payment-message').textContent = '';
+  document.getElementById('payment-element').innerHTML = '';
+
+  document.getElementById('modalOverlay').classList.add('active');
 
   try {
-    // Step 1: Create payment intent on backend
     const response = await fetch('/api/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ amount, productName }),
     });
 
     const data = await response.json();
+    if (!data.success) throw new Error(data.message);
 
-    if (!data.success) {
-      throw new Error(data.message);
-    }
-
-    // Step 2: Initialize Stripe Elements with client secret
     elements = stripe.elements({ clientSecret: data.clientSecret });
-
-    // Step 3: Create and mount the payment element
     const paymentElement = elements.create('payment');
     paymentElement.mount('#payment-element');
 
-    // Step 4: Show payment form and hide buy button
-    document.getElementById('payment-container').style.display = 'block';
-    document.getElementById('submitBtn').style.display = 'block';
-    buyBtn.style.display = 'none';
-
   } catch (error) {
-    console.error('Error:', error);
-    buyBtn.textContent = 'Buy Now — ₹499';
-    buyBtn.disabled = false;
-    alert('Something went wrong. Please try again.');
+    console.error('Checkout error:', error);
+    document.getElementById('payment-message').textContent = 'Failed to load payment. Try again.';
+  }
+}
+
+// ── Close Modal ──
+document.getElementById('modalClose').addEventListener('click', () => {
+  document.getElementById('modalOverlay').classList.remove('active');
+});
+
+document.getElementById('modalOverlay').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('active');
   }
 });
 
-// Handle payment form submission
+// ── Submit Payment ──
 document.getElementById('submitBtn').addEventListener('click', async () => {
   const submitBtn = document.getElementById('submitBtn');
+  const payBtnText = document.getElementById('payBtnText');
   const messageDiv = document.getElementById('payment-message');
 
-  submitBtn.textContent = 'Processing...';
+  payBtnText.textContent = 'Processing...';
   submitBtn.disabled = true;
 
-  // Confirm payment with Stripe
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
@@ -62,10 +81,9 @@ document.getElementById('submitBtn').addEventListener('click', async () => {
     },
   });
 
-  // If error, show message
   if (error) {
     messageDiv.textContent = error.message;
-    submitBtn.textContent = 'Pay ₹499 Securely';
+    payBtnText.textContent = `Pay ₹${(currentProduct.amount / 100).toLocaleString('en-IN')} Securely`;
     submitBtn.disabled = false;
   }
 });
