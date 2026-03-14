@@ -157,4 +157,4 @@ Use these Stripe test card details:
 
 ## Author
 
-Built by VijayPant375(https://github.com/VijayPant375)
+Built by [Vijay Pant](https://github.com/VijayPant375)
