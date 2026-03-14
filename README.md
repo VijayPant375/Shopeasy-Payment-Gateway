@@ -189,4 +189,8 @@ Contributions, bug reports, and feature requests are welcome. Please open an iss
 
 ---
 
+<div align="center">
+
 Built by [Vijay Pant](https://github.com/VijayPant375)
+
+</div>
