@@ -1,3 +1,5 @@
+<div align="center">
+
 # ShopEasy — Payment Gateway Integration Demo
 
 A full-stack payment gateway integration demo built with **Node.js**, **Express**, and **Stripe**. Simulates a real online store with secure checkout, payment verification, and a clean responsive UI with dark mode support.
@@ -6,7 +8,7 @@ A full-stack payment gateway integration demo built with **Node.js**, **Express*
 
 ## Live Demo
 
-> Run locally following the setup guide below.
+🔗 [https://shopeasy-payment-gateway.onrender.com](https://shopeasy-payment-gateway.onrender.com)
 
 ---
 
@@ -158,3 +160,5 @@ Use these Stripe test card details:
 ## Author
 
 Built by [Vijay Pant](https://github.com/VijayPant375)
+
+</div>
