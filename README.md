@@ -1,89 +1,109 @@
 <div align="center">
 
-# ShopEasy — Payment Gateway Integration Demo
+# 🛍️ Shopeasy Payment Gateway
 
-A full-stack payment gateway integration demo built with **Node.js**, **Express**, and **Stripe**. Simulates a real online store with secure checkout, payment verification, and a clean responsive UI with dark mode support.
+**A full-stack payment gateway integration demo built with Node.js, Express, and Stripe — featuring real checkout, server-side verification, dark mode, and a clean responsive UI.**
 
----
+[![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org)
+[![Express](https://img.shields.io/badge/Framework-Express-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com)
+[![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF?style=flat-square&logo=stripe&logoColor=white)](https://stripe.com)
+[![Deployed on Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?style=flat-square&logo=render&logoColor=white)](https://shopeasy-payment-gateway.onrender.com)
 
-## Live Demo
+🔗 [Live Demo](https://shopeasy-payment-gateway.onrender.com)
 
-🔗 [https://shopeasy-payment-gateway.onrender.com](https://shopeasy-payment-gateway.onrender.com)
-
----
-
-## Features
-
-- Browse multiple products with dynamic pricing
-- Secure Stripe checkout integrated directly on the page
-- Backend payment intent creation via Express API
-- Cryptographic payment verification on the server
-- Payment success page with order confirmation
-- Dark mode with persistence across pages
-- Fully responsive design for mobile and desktop
+</div>
 
 ---
 
-## Tech Stack
+## 📖 Overview
+
+**ShopEasy** is a production-style e-commerce payment demo that simulates a real online store with full Stripe integration. It demonstrates the complete payment lifecycle — from order creation on the backend to cryptographic verification after checkout — built with clean, readable full-stack code.
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 🛒 Product Store | 4 products with dynamic pricing and a responsive grid layout |
+| 💳 Stripe Checkout | Payment form embedded directly on the page using Stripe Elements |
+| 🔐 Payment Verification | Server-side verification of payment intent status via Stripe API |
+| ✅ Success Page | Order confirmation page with real Stripe Payment ID |
+| 🌙 Dark Mode | Persistent dark/light mode toggle using localStorage |
+| 📱 Responsive Design | Fully mobile-friendly layout |
+| 🔒 Secure by Design | API keys stored server-side, never exposed to the client |
+
+---
+
+## 🏗️ Payment Flow
+```
+User clicks Buy Now
+        │
+        ▼
+Frontend calls POST /api/order
+        │
+        ▼
+Backend creates Stripe Payment Intent
+        │
+        ▼
+Stripe Elements payment form mounts
+        │
+        ▼
+User enters card details and submits
+        │
+        ▼
+Stripe redirects to /success.html
+        │
+        ▼
+Frontend calls POST /api/verify
+        │
+        ▼
+Backend verifies payment with Stripe API
+        │
+        ▼
+Success page displays order confirmation
+```
+
+---
+
+## 🛠️ Tech Stack
 
 | Layer | Technology |
 |---|---|
 | Frontend | HTML5, CSS3, Vanilla JavaScript |
 | Backend | Node.js, Express |
-| Payment | Stripe API (Test Mode) |
+| Payment Gateway | Stripe API (Test Mode) |
+| Deployment | Render |
 | Dev Tools | Nodemon, Dotenv |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 ```
-payment-demo/
+shopeasy-payment-gateway/
 ├── client/
-│   ├── index.html        ← Product listing page
-│   ├── success.html      ← Payment success page
-│   ├── style.css         ← All styles + dark mode
-│   ├── script.js         ← Stripe checkout logic
-│   └── success.js        ← Payment verification on frontend
+│   ├── index.html          ← Product listing page
+│   ├── success.html        ← Payment success page
+│   ├── style.css           ← All styles + dark mode
+│   ├── script.js           ← Stripe checkout logic
+│   └── success.js          ← Frontend payment verification
 ├── server/
-│   ├── server.js         ← Express app entry point
+│   ├── server.js           ← Express app entry point
 │   └── routes/
-│       ├── orderRoutes.js   ← POST /api/order
-│       └── verifyRoutes.js  ← POST /api/verify
+│       ├── orderRoutes.js  ← POST /api/order
+│       └── verifyRoutes.js ← POST /api/verify
 ├── config/
-│   └── stripe.js         ← Stripe instance setup
+│   └── stripe.js           ← Stripe instance setup
 ├── utils/
-│   └── verifyPayment.js  ← Payment verification utility
-├── .env.example          ← Environment variable template
+│   └── verifyPayment.js    ← Payment verification utility
+├── .env.example
 ├── package.json
 └── README.md
 ```
 
 ---
 
-## Payment Flow
-```
-User clicks Buy Now
-       ↓
-Frontend calls POST /api/order
-       ↓
-Backend creates Stripe Payment Intent
-       ↓
-Frontend mounts Stripe payment form
-       ↓
-User enters card details and pays
-       ↓
-Stripe redirects to /success.html
-       ↓
-Frontend calls POST /api/verify
-       ↓
-Backend verifies payment with Stripe
-       ↓
-Success page shows order confirmation
-```
-
----
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -92,18 +112,18 @@ Success page shows order confirmation
 
 ### Installation
 
-1. Clone the repository
+1. **Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/payment-demo.git
-cd payment-demo
+git clone https://github.com/VijayPant375/Shopeasy-Payment-Gateway.git
+cd Shopeasy-Payment-Gateway
 ```
 
-2. Install dependencies
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
-3. Set up environment variables
+3. **Set up environment variables**
 ```bash
 cp .env.example .env
 ```
@@ -115,39 +135,37 @@ STRIPE_SECRET_KEY=sk_test_your_key_here
 STRIPE_PUBLISHABLE_KEY=pk_test_your_key_here
 ```
 
-4. Add your publishable key to `client/script.js`
+4. **Add your publishable key to `client/script.js`**
 ```javascript
 const stripe = Stripe('pk_test_your_key_here');
 ```
 
-5. Start the server
+5. **Start the development server**
 ```bash
 npm run dev
 ```
 
-6. Open your browser
+6. **Open your browser**
 ```
 http://localhost:3000
 ```
 
 ---
 
-## Test Payments
+## 💳 Test Payments
 
-Use these Stripe test card details:
+Use these Stripe test card details — no real money is charged:
 
 | Field | Value |
 |---|---|
 | Card Number | `4242 4242 4242 4242` |
-| Expiry | Any future date |
+| Expiry Date | Any future date |
 | CVC | Any 3 digits |
 | Name | Any name |
 
-> No real money is charged in test mode.
-
 ---
 
-## API Endpoints
+## 📡 API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
@@ -157,8 +175,18 @@ Use these Stripe test card details:
 
 ---
 
-## Author
+## 🔐 Security
+
+- Stripe secret key is stored server-side only and never exposed to the client
+- Payment verification is performed server-side via Stripe API
+- Environment variables are never committed to version control
+
+---
+
+## 📬 Contributing
+
+Contributions, bug reports, and feature requests are welcome. Please open an issue or submit a pull request.
+
+---
 
 Built by [Vijay Pant](https://github.com/VijayPant375)
-
-</div>
